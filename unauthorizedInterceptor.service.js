@@ -37,4 +37,4 @@
     UnauthorizedInterceptor
   ]);
 
-})(angular.module("angular.HX.token.interceptors"));
+})(angular.module("angular.token.interceptors"));
