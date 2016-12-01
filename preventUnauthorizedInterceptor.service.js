@@ -1,3 +1,8 @@
+(function () {
+  angular.module('angular.token.interceptors', []);
+})();
+
+
 (function PrevenUnauthInterceptorFactory(module) {
 
   function PreventUnauthorizedInterceptor($rootScope, $q) {

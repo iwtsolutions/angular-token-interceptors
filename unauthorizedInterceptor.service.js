@@ -4,26 +4,26 @@
     $rootScope,
     $q,
     jwtHelper,
-    httpBuffer,
-    localStorageService
+    httpBufferSvc
   ) {
 
     return {
       responseError: function responseError(rejection) {
-        var deferred = $q.defer();
-        if (!rejection.config.ignoreAuthModule) {
-          switch (rejection.status) {
-            case 401:
-              httpBuffer.append(rejection.config, deferred);
-              $rootScope.$broadcast("event:auth-refreshRequired", rejection.status);
-              break;
-            case 403:
-              $rootScope.$broadcast("event:auth-forbidden", rejection.status);
-              break;
-          }
-        }
-        deferred.reject(rejection);
-        return deferred.promise;
+         if (!rejection.config.ignoreAuthModule) {
+            switch (rejection.status) {
+               case 401:
+                  var deferred = $q.defer();
+                  httpBufferSvc.append(rejection.config, deferred);
+                  $rootScope.$broadcast('event:auth-refreshRequired', rejection, deferred);
+                  return deferred.promise;
+               case 403:
+                  $rootScope.$broadcast('event:auth-forbidden', rejection);
+                  break;
+               // no default
+            }
+         }
+         // otherwise, default behaviour
+         return $q.reject(rejection);
       }
     };
   }
@@ -32,8 +32,7 @@
     "$rootScope",
     "$q",
     "jwtHelper",
-    "httpBuffer",
-    "localStorageService",
+    "httpBufferSvc",
     UnauthorizedInterceptor
   ]);
 
