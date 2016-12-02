@@ -5,5 +5,5 @@
     "Jonathan Skelton <jskelton@iwthealth.com>"
   ],
   "description": "Request interceptor to be used for token validation",
-  "license": "MIT",
+  "license": "MIT"
 }
