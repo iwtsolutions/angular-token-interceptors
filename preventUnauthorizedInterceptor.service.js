@@ -10,8 +10,8 @@
       request: function interceptorRequest(config) {
 
         var isHtmlOrCss = (config.url.indexOf('.html') || config.url.indexOf('.css')) > -1;
-        var isOAuthOrLogin = config.url.indexOf('oauth') > -1 || config.url.indexOf('login') > -1;
-        if (isHtmlOrCss || isOAuthOrLogin) {
+        var isOAuthOrLoginLogOut = config.url.indexOf('oauth') > -1 || config.url.indexOf('login') > -1 || config.url.indexOf('logout') > -1;
+        if (isHtmlOrCss || isOAuthOrLoginLogOut) {
           return config;
         }
 
